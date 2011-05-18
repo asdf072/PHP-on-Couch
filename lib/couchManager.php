@@ -37,6 +37,12 @@ class couchManager
 	
 	public function createClient($dsn, $dbname, $options = array())
 	{
+		// Maybe just return the client if already registered?
+		if(isset($this->_client_instances[$dbname]))
+		{
+			throw new couchManagerException("Client for $dbname already registered. " .
+				"Use couchManager::getClient($dbname) instead.");
+		}
 		$client = new couchClient($dsn, $dbname, $options);
 		$this->registerClient($client);
 		return $client;
