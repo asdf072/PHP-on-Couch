@@ -1,6 +1,5 @@
 <?PHP
 
-
 /**
 * Special class to handle replication stuff, as the API is still evolving
 *
@@ -8,6 +7,9 @@
 *
 *
 */
+
+namespace PhpOnCouch;
+
 class couchReplicator {
 	/**
 	* @var reference to our CouchDB client

@@ -1,6 +1,4 @@
 <?PHP
-
-
 /**
 * Special class to handle administration tasks
 * - create administrators
@@ -11,6 +9,8 @@
 *
 *
 */
+namespace PhpOnCouch;
+
 class couchAdmin {
 	/**
 	* @var reference to our CouchDB client

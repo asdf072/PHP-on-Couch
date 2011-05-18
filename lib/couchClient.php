@@ -26,6 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 *
 *
 */
+namespace PhpOnCouch;
+
 class couchClient extends couch {
 
 	/**
@@ -978,7 +980,7 @@ class couchClient extends couch {
 * and adds a method getBody() to fetch the body sent by the server (if any)
 *
 */
-class couchException extends Exception {
+class couchException extends \Exception {
 	// CouchDB response codes we handle specialized exceptions
 	protected static $code_subtypes = array(404=>'couchNotFoundException', 403=>'couchForbiddenException', 401=>'couchUnauthorizedException', 417=>'couchExpectationException');
 	// more precise response problem
