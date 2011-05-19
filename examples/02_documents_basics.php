@@ -23,7 +23,7 @@ require_once "../lib/couchDocument.php";
 /**
 * create the client
 */
-$client = new couchClient($couch_dsn,$couch_db);
+$client = new \PhpOnCouch\couchClient($couch_dsn,$couch_db);
 
 
 /**

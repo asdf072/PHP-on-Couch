@@ -6,6 +6,7 @@
 
  For this to work, you have to tell the database DSN (example : http://couch.server.com:5984/) and the name of a database that does not exist
 
+ 5/18/2011 -- included namespace support (untested)
 */
 
 ### ANON DSN
@@ -16,7 +17,7 @@ $couch_db = "example";
 
 
 /**
-* include the library
+* include the library (or autoloader)
 */
 
 require_once "../lib/couch.php";
@@ -26,7 +27,7 @@ require_once "../lib/couchDocument.php";
 /**
 * create the client
 */
-$client = new couchClient($couch_dsn,$couch_db);
+$client = new \PhpOnCouch\couchClient($couch_dsn,$couch_db);
 
 
 
@@ -91,7 +92,7 @@ echo "Just to see exceptions, we try to create the database (that already exist.
 try {
         $result = $client->createDatabase();
 } catch (Exception $e) {
-        if ( $e instanceof couchException ) {
+        if ( $e instanceof \PhpOnCouch\couchException ) {
                 echo "We issued the request, but couch server returned an error.\n";
                 echo "We can have HTTP Status code returned by couchDB using \$e->getCode() : ". $e->getCode()."\n";
                 echo "We can have error message returned by couchDB using \$e->getMessage() : ". $e->getMessage()."\n";

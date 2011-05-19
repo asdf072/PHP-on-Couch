@@ -48,7 +48,7 @@ class couchManager
 		return $client;
 	}
 	
-	/****
+	/**
 	* If no $db_name, assumes one connection is being used.
 	*/
 	public function getClient($db_name = NULL)
@@ -69,6 +69,24 @@ class couchManager
 			"You must specify a database name if using more than one connection." :
 			"No client connections were established yet.";
 		throw new couchManagerException($exception_msg);
+	}
+	
+	/**
+	* Append normal method name with "Static", or php will try to call the function directly
+	*/
+	public static function __callStatic($function, $args)
+	{
+		if(substr($function, -6) != 'Static')
+		{
+			throw new couchManagerException("You can't call $function statically. Try {$function}Static.");
+		}
+		$function = str_replace ('Static', '', $function);
+		if(is_null(self::$_self_instance)) self::getInstance();
+		if(!method_exists(self::$_self_instance, $function))
+		{
+			throw new couchManagerException("$function is not a method available to " . __CLASS__);
+		}		
+		return call_user_func_array(array(self::$_self_instance, $function), (array)$args);
 	}
 }
 
